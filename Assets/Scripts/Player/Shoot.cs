@@ -5,6 +5,10 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     private Camera _mainCamera;
+
+    [SerializeField] private int _damageAmount = 5;
+
+    [SerializeField] private GameObject[] _bloodSpatterPrefabs;
     
     void Start()
     {
@@ -26,8 +30,20 @@ public class Shoot : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Transform objectHit = hit.transform;
-            Debug.Log(hit.transform.name);
+            Debug.Log(hit.collider.name);
+            Health targetHealth = hit.collider.gameObject.GetComponent<Health>();
+            if (targetHealth != null)
+            {
+                InstantiateBloodSpatter(hit);                
+                targetHealth.Damage(_damageAmount);
+            }
         }
+    }
+
+    private void InstantiateBloodSpatter(RaycastHit hit)
+    {
+        GameObject spatter = Instantiate(_bloodSpatterPrefabs[Random.Range(0, _bloodSpatterPrefabs.Length)], hit.point, Quaternion.LookRotation(hit.normal));
+        spatter.transform.localScale = spatter.transform.localScale * 0.5f;
+        spatter.transform.parent = hit.transform;
     }
 }

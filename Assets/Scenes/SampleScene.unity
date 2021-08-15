@@ -265,6 +265,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9cbec006c0a542448fd30a7cab41e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageAmount: 5
+  _bloodSpatterPrefabs:
+  - {fileID: 5192175068684042784, guid: 89c8bc12c826045588d79985900e38f1, type: 3}
+  - {fileID: 8729043021112652020, guid: 819c6268a8e154147984aa729b6f126b, type: 3}
+  - {fileID: 406282296112420188, guid: a1f5bfb389b984996bae2f3fe9ac9021, type: 3}
+  - {fileID: 3218514044447254170, guid: 3b0c528ce140b47c1be35eba9e9f82b2, type: 3}
 --- !u!114 &62305700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,8 +283,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1375bff1b425944794e2ea7efe0717e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 0
-  _minHealth: 0
+  _maxHealth: 100
+  _minHealth: 1
+  _currentHealth: 0
 --- !u!1 &192033600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,20 +1065,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2340025870406702450}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1809973407
-MonoBehaviour:
+--- !u!135 &1809973413
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809973406}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1375bff1b425944794e2ea7efe0717e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 0
-  _minHealth: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2020701785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,8 +1158,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5024145963771359179, guid: b2e4c48aff2db8b4cb1a62aa564b7adc,
         type: 3}
-      propertyPath: _movementSpeed
-      value: 0.5
+      propertyPath: _damageAmount
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8007742440966749323, guid: b2e4c48aff2db8b4cb1a62aa564b7adc,
         type: 3}

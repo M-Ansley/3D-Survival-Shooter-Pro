@@ -6,6 +6,7 @@ public class EnemyAI : MonoBehaviour, IDamageable<float>, IKillable
 {
     private CharacterController _controller;
     private Player _player;
+    private Health _playerHealth;
 
     [Header("Movement")]
     private Vector3 _moveDirection = Vector3.zero;
@@ -19,17 +20,48 @@ public class EnemyAI : MonoBehaviour, IDamageable<float>, IKillable
 
     [Header("Rotation")]
     private float _rotateSpeed = 3f;
-    
+
+    [Header("Attack")]
+    [SerializeField] private float _attackDelay = 3f;
+    [SerializeField] private int _damageAmount = 5;
+    private float _nextAttack = -1f;
+
+    public enum EnemyState
+    {
+        Idle,
+        Attack,
+        Chase
+    }
+
+    [SerializeField] private EnemyState _currentState = EnemyState.Chase;
+
     void Start()
     {
         _controller = GetComponent<CharacterController>();
         _player = FindObjectOfType<Player>();
+        if (_player != null)
+            _playerHealth = _player.GetComponent<Health>();
     }
-    
+
     void FixedUpdate()
     {
-        EnemyMovement();
+        // Our 'State Machine'
+        switch (_currentState)
+        {
+            case EnemyState.Chase:
+                EnemyMovement();
+                break;
+            case EnemyState.Attack:
+                EnemyAttack();
+                break;
+            case EnemyState.Idle:
+                break;
+            default:
+                break;
+        }
     }
+
+    #region Movement_and_Rotation
 
     private void EnemyMovement()
     {
@@ -56,6 +88,23 @@ public class EnemyAI : MonoBehaviour, IDamageable<float>, IKillable
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
+    #endregion
+
+    #region Attack
+
+    private void EnemyAttack()
+    {
+        if (Time.time > _nextAttack)
+        {
+            if (_playerHealth != null)
+            {
+                _playerHealth.Damage(_damageAmount);
+                _nextAttack = Time.time + _attackDelay;
+            }
+        }
+    }
+
+    #endregion
 
     #region Health_and_Damage
 
@@ -70,4 +119,21 @@ public class EnemyAI : MonoBehaviour, IDamageable<float>, IKillable
     }
 
     #endregion
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _currentState = EnemyState.Attack;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _currentState = EnemyState.Chase;
+        }
+    }
 }

@@ -52,6 +52,10 @@ public class Player : MonoBehaviour, IDamageable<float>, IKillable
         {
             SetCursorLock(false);
         }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            SetCursorLock(true);
+        }
     }
 
     private void CameraLook()
