@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable<float>, IKillable
 {
     [Header("Objects")]
     private CharacterController _controller;
@@ -62,14 +62,11 @@ public class Player : MonoBehaviour
         Vector3 newPlayerRotation = transform.localEulerAngles;
         newPlayerRotation.y += mouseX * _mouseSensitivity;
         transform.localRotation = Quaternion.AngleAxis(newPlayerRotation.y, Vector3.up);
-        //Vector3 newRotation = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y + mouseX * _mouseSensitivity, transform.localEulerAngles.z);
-         //transform.localEulerAngles = newRotation;
 
         Vector3 newCameraRotation = _cameraObj.transform.localEulerAngles;
         newCameraRotation.x -= mouseY * _mouseSensitivity;
+        newCameraRotation.x = Mathf.Clamp(newCameraRotation.x, 0, 26);
         _cameraObj.transform.localRotation = Quaternion.AngleAxis(newCameraRotation.x, Vector3.right);
-
-
     }
 
     private void FixedUpdate()
@@ -108,4 +105,21 @@ public class Player : MonoBehaviour
             Cursor.visible = true;
         }
     }
+
+
+
+
+    #region Health_and_Damage
+
+    public void Damage(float damageTaken) // From IDamageable Interface
+    {
+
+    }
+
+    public void Kill() // From IKillable Interface
+    {
+
+    }
+
+    #endregion
 }
