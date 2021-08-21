@@ -42,7 +42,7 @@ public class Shoot : MonoBehaviour
 
     private void InstantiateBloodSpatter(RaycastHit hit)
     {
-        GameObject spatter = Instantiate(_bloodSpatterPrefabs[Random.Range(0, _bloodSpatterPrefabs.Length)], hit.point, Quaternion.LookRotation(hit.normal));
+        GameObject spatter = Instantiate(_bloodSpatterPrefabs[Random.Range(0, _bloodSpatterPrefabs.Length)], hit.point + (hit.normal * 0.01f), Quaternion.LookRotation(hit.normal));
         spatter.transform.localScale = spatter.transform.localScale * 0.5f;
         spatter.transform.parent = hit.transform;
     }
