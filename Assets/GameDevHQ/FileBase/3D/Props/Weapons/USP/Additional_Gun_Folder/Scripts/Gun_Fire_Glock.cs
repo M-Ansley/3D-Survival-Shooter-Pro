@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun_Fire_Pistol : MonoBehaviour
+public class Gun_Fire_Glock : MonoBehaviour
 {
     [SerializeField]
     private ParticleSystem _smoke;
@@ -48,7 +48,7 @@ public class Gun_Fire_Pistol : MonoBehaviour
                 _anim.SetBool("Automatic_Fire", true);
             }
         }
- 
+
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             if (FullAuto == true)
@@ -60,6 +60,11 @@ public class Gun_Fire_Pistol : MonoBehaviour
             {
                 _anim.SetBool("Fire", false);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _anim.SetTrigger("Reload");
         }
     }
 
