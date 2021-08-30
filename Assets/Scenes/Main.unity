@@ -984,7 +984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 413849343}
-  _speed: 10
+  _speed: 40
 --- !u!1 &986610892 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100010, guid: 7574fda882b3af745a7920bf72306752,
@@ -1360,7 +1360,7 @@ MonoBehaviour:
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
   m_SourceObjectsGUIToggle: 1
-  m_SettingsGUIToggle: 0
+  m_SettingsGUIToggle: 1
 --- !u!114 &1465156545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,7 +1374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1652518686}
-  _speed: 10
+  _speed: 40
 --- !u!4 &1564256968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400216, guid: 7574fda882b3af745a7920bf72306752,
@@ -1747,7 +1747,7 @@ PrefabInstance:
     - target: {fileID: 2108647113033677153, guid: b2e4c48aff2db8b4cb1a62aa564b7adc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5024145963771359179, guid: b2e4c48aff2db8b4cb1a62aa564b7adc,
         type: 3}
